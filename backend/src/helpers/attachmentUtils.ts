@@ -8,19 +8,19 @@ const s3BucketName = process.env.S3_BUCKET
 const urlExpiration = process.env.SIGNED_URL_EXPIRATION
 
 export class AttachmentUtils {
-    constructor(
+  constructor(
         private readonly s3 = new XAWS.S3({signatureVersion: 'v4'}),
-        private readonly bucketName = s3BucketName
-    ) {}
+    private readonly bucketName = s3BucketName
+  ) {}
     getAttachmentUrl(idTodo: string): string {
-        return `http://${this.bucketName}.s3.amazonaws.com/${idTodo}`
-    }
+        return `https://${this.bucketName}.s3.amazonaws.com/${idTodo}`
+  }
 
     getSignedUrl(idTodo: string): Promise<string> {
-        return this.s3.getSignedUrlPromise('putObject', {
-            Bucket: this.bucketName,
-            key: idTodo,
-            Expires: urlExpiration
-        })
-    }
+      return this.s3.getSignedUrlPromise('putObject', {
+        Bucket: this.bucketName,
+        Key: idTodo,
+        Expires: urlExpiration
+      })
+  }
 }
