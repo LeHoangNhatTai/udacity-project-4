@@ -55,8 +55,8 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
         todos: [...this.state.todos, newTodo],
         newTodoName: ''
       })
-    } catch {
-      alert('Todo creation failed')
+    } catch(e) {
+      alert('Todo creation failed' + e)
     }
   }
 
@@ -116,24 +116,24 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
   renderCreateTodoInput() {
     return (
       <Grid.Row>
-        <Grid.Column width={16}>
-          <Input
-            action={{
-              color: 'teal',
-              labelPosition: 'left',
-              icon: 'add',
-              content: 'New task',
-              onClick: this.onTodoCreate
-            }}
-            fluid
-            actionPosition="left"
-            placeholder="To change the world..."
-            onChange={this.handleNameChange}
-          />
-        </Grid.Column>
-        <Grid.Column width={16}>
-          <Divider />
-        </Grid.Column>
+      <Grid.Column width={16}>
+        <Input
+          action={{
+            color: 'teal',
+            labelPosition: 'left',
+            icon: 'add',
+            content: 'New task',
+            onClick: this.onTodoCreate
+          }}
+          fluid
+          actionPosition="left"
+          placeholder="To change the world..."
+          onChange={this.handleNameChange}
+        />
+      </Grid.Column>
+      <Grid.Column width={16}>
+        <Divider />
+      </Grid.Column>
       </Grid.Row>
     )
   }
@@ -159,7 +159,7 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
   renderTodosList() {
     return (
       <Grid padded>
-        {this.state.todos.map((todo, pos) => {
+        {this.state.todos?.map((todo, pos) => {
           return (
             <Grid.Row key={todo.todoId}>
               <Grid.Column width={1} verticalAlign="middle">
