@@ -19,7 +19,7 @@ export const handler = middy(
     return {
       statusCode: 200,
       headers: {
-        'Access-control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*'
       },
       body: JSON.stringify(updTodo)
     }
@@ -29,7 +29,7 @@ export const handler = middy(
 handler
   .use(httpErrorHandler())
   .use(
-    cors({
-      credentials: true
-    })
-  )
+  cors({
+    credentials: true
+  })
+)

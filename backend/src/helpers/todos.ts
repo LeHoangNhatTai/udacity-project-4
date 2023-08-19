@@ -1,5 +1,5 @@
 import { TodoAccess } from './todosAcess'
-import { AttachmentUtils } from './attachmentUtils';
+import { AttachmentUtils } from '../helpers/attachmentUtils'
 import { CreateTodoRequest } from '../requests/CreateTodoRequest'
 import { UpdateTodoRequest } from '../requests/UpdateTodoRequest'
 import { createLogger } from '../utils/logger'
@@ -15,17 +15,17 @@ export const getTodosForUser = async (userId: string) => {
 }
 
 export const createTodo = async (todo: CreateTodoRequest, userId: string) => {
-    const todoId = uuid.v4()
-    logger.info(`Creating todo ${todoId}`)
-    const attachmentUrl = attachmentUtils.getAttachmentUrl(todoId)
+  const todoId = uuid.v4()
+  logger.info(`Creating todo ${todoId}`)
+  const attachmentUrl = attachmentUtils.getAttachmentUrl(todoId)
     return todoAccess.createTodoItem({
-        userId,
-        todoId,
-        createdAt: new Date().toISOString(),
-        done: false,
-        attachmentUrl,
-        ...todo
-    })
+    userId,
+    todoId,
+    createdAt: new Date().toISOString(),
+    done: false,
+    attachmentUrl,
+    ...todo
+  })
 }
 
 export const updateTodo = async (userId: string, todoId: string, todo: UpdateTodoRequest) => {

@@ -65,7 +65,7 @@ async function verifyToken(authHeader: string): Promise<JwtPayload> {
   try {
     const res = await Axios.get(jwksUrl)
     const keys = res.data.keys
-    const key = keys.find(x => x.kid === jwt.header.kid)
+    const key = keys.find((x) => x.kid === jwt.header.kid)
     if (!key) {
       logger.error('keynotfound', {keyId: jwt.header.kid})
       throw new Error('key not found')

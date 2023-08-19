@@ -21,11 +21,11 @@ export const handler = middy(
     // TODO: Return a presigned URL to upload a file for a TODO item with the provided id
     const userId = getUserId(event)
     const upUrl = s3.getSignedUrl('putObject', {
-        Bucket: bucketName,
-        Key: todoId,
-        Expires: urlExpiration
+      Bucket: bucketName,
+      Key: todoId,
+      Expires: urlExpiration
     })
-    logger.info('Generate Upload Url:', { todoId, upUrl})
+    logger.info('Generate Upload Url:', { todoId, upUrl })
 
     await todoAccess.saveImgUrl(userId, todoId, bucketName)
 
@@ -34,7 +34,7 @@ export const handler = middy(
       headers: {
         'Access-Control-Allow-Origin': '*'
       },
-      body: JSON.stringify({ uploadUrl: upUrl})
+      body: JSON.stringify({ uploadUrl: upUrl })
     }
   }
 )
@@ -42,7 +42,7 @@ export const handler = middy(
 handler
   .use(httpErrorHandler())
   .use(
-    cors({
-      credentials: true
-    })
-  )
+  cors({
+    credentials: true
+  })
+)

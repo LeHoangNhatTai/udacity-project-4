@@ -14,13 +14,11 @@ export const handler = middy(
 
     return {
       statusCode: 200,
-      body:
-        JSON.stringify({
-          items: todos
-        })
+      body: JSON.stringify(todos)
     }
   }
 )
+
 handler.use(
   cors({
     credentials: true
