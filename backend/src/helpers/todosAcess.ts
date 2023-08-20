@@ -87,7 +87,8 @@ export class TodoAccess {
           UpdateExpression: 'set attachmentUrl = :attachmentUrl',
           ExpressionAttributeValues: {
             ':attachmentUrl': `https://${bucketName}.s3.amazonaws.com/${todoId}`
-          }
+          },
+          ReturnValues: 'UPDATED_NEW'
         })
         .promise()
       logger.info(
