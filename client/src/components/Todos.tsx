@@ -61,15 +61,15 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
   }
 
   onTodoDelete = async (todoId: string) => {
-    try {
-      await deleteTodo(this.props.auth.getIdToken(), todoId)
-      this.setState({
+      try {
+        await deleteTodo(this.props.auth.getIdToken(), todoId)
+        this.setState({
         todos: this.state.todos.filter(todo => todo.todoId !== todoId)
-      })
-    } catch {
-      alert('Todo deletion failed')
+        })
+      } catch {
+        alert('Todo deletion failed')
+      }
     }
-  }
 
   onTodoCheck = async (pos: number) => {
     try {
@@ -104,9 +104,9 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
   render() {
     return (
       <div>
-        <Header as="h1">TODOs</Header>
+          <Header as="h1">TODOs</Header>
 
-        {this.renderCreateTodoInput()}
+          {this.renderCreateTodoInput()}
 
         {this.renderTodos()}
       </div>
@@ -115,26 +115,27 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
 
   renderCreateTodoInput() {
     return (
-      <Grid.Row>
-      <Grid.Column width={16}>
-        <Input
-          action={{
-            color: 'teal',
-            labelPosition: 'left',
-            icon: 'add',
-            content: 'New task',
-            onClick: this.onTodoCreate
-          }}
-          fluid
-          actionPosition="left"
+        <Grid.Row>
+          <Grid.Column width={16}>
+            <Input
+              action={{
+                disabled: this.state.newTodoName.trim() === '',
+                color: 'teal',
+                labelPosition: 'left',
+                icon: 'add',
+                content: 'New task',
+                onClick: this.onTodoCreate
+              }}
+              fluid
+              actionPosition="left"
           placeholder="To change the world..."
-          onChange={this.handleNameChange}
-        />
-      </Grid.Column>
-      <Grid.Column width={16}>
-        <Divider />
-      </Grid.Column>
-      </Grid.Row>
+              onChange={this.handleNameChange}
+            />
+          </Grid.Column>
+          <Grid.Column width={16}>
+            <Divider />
+          </Grid.Column>
+        </Grid.Row>
     )
   }
 
@@ -169,7 +170,7 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
                 />
               </Grid.Column>
               <Grid.Column width={10} verticalAlign="middle">
-                {todo.name}
+                  {todo.name}
               </Grid.Column>
               <Grid.Column width={3} floated="right">
                 {todo.dueDate}
@@ -195,9 +196,9 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
               {todo.attachmentUrl && (
                 <Image src={todo.attachmentUrl} size="small" wrapped />
               )}
-              <Grid.Column width={16}>
-                <Divider />
-              </Grid.Column>
+                <Grid.Column width={16}>
+                  <Divider />
+                </Grid.Column>
             </Grid.Row>
           )
         })}
